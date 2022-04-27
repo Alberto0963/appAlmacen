@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   resources :user
   resources :producto
+  resources :supplier
+
   post '/auth/login', to: 'authentication#login'
   
 end

@@ -2,50 +2,52 @@ class ProductoController < ApplicationController
 
 
     skip_before_action :authenticate_request, only: [:create]
-    before_action :set_user, only: [:show, :destroy]
+    before_action :set_product, only: [:update, :show, :destroy]
 
-    #GET /user  
+    #GET /product  
     def index
         @products = Product.all 
         render json: @products, status: :ok
     end
 
-    #GET /user/{email}
+    #GET /product/{id}
     def show
         render json: @products, status: :ok
     end
 
-    #POST /user
+    #POST /product
     def create
-        @products = Product.new(user_params)
+        @products = Product.new(product_params)
         if @products.save
             render json: @products, status: :ok
         else
             render json: { errors: @products.errors.full_messages },
                     status: :unprocessable_entity
         end
-    end
+    end     
 
-    #PUT /user/{email}
+    #PUT /product/{id}
     def update
-        unless @products.update(user_param)
+        if @products.update(product_params)
+            render json: {message: "product updated", status: :ok}
+        else  
             render json: {errors: @products.errors.full_messages },
                     status: :unprocessable_entity
         end
     end
 
-    #DELETE /user/{email}
+    #DELETE /product/{id}
     def destroy
         @products.destroy
     end
 
     private
         def product_params
-            params.permit(:idSupplier,:name, :price, :band, :barcode, :expirationDate, :qty)
+            params.permit(:idSupplier,:name, :price, :brand, :barcode, :expirationDate, :qty, :descripcion)
         end
 
         def set_product
-            @products = Products.find(params[:id])
+            @products = Product.find params[:id]
         end
 
     

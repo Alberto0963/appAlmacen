@@ -7,4 +7,6 @@ class Product < ApplicationRecord
     validates :barcode, presence: true
     validates :expirationDate, presence: true
     validates :qty, presence: true
+
+    validates :descripcion, presence: true
 end
