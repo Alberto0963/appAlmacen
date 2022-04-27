@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  idSuplier: 
+  name: MyString
+  price: 
+  brand: MyString
+  barCode: MyString
+  expirationDate: 2022-04-27
+  qty: 
+
+two:
+  idSuplier: 
+  name: MyString
+  price: 
+  brand: MyString
+  barCode: MyString
+  expirationDate: 2022-04-27
+  qty: 
