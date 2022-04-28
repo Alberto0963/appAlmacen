@@ -34,5 +34,12 @@ module AppAlmacen
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     secret_key_base = 'kidsmapp'
+
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :option]
+      end
+    end
   end
 end
