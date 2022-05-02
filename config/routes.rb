@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   
   # Users request
   get '/apiv1/users', to: 'user#index'
-  post '/apiv1/user/update', to: 'users#update'
-  post '/apiv1/user/create', to: 'users#create'
-  post '/apiv1/user/delete', to: 'users#destroy'
+  post '/apiv1/user/update', to: 'user#update'
+  post '/apiv1/user/create', to: 'user#create'
+  post '/apiv1/user/delete', to: 'user#destroy'
 
   # product request
   get '/apiv1/products', to: 'producto#index'
