@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   
   # Users request
   get '/apiv1/users', to: 'user#index'
+  get '/apiv1/user/show', to: 'user#show'
   post '/apiv1/user/update', to: 'user#update'
   post '/apiv1/user/create', to: 'user#create'
   post '/apiv1/user/delete', to: 'user#destroy'
