@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   # suppliers request
   get '/apiv1/suppliers', to: 'supplier#index'
+  get '/apiv1/suppliers/getMyClients', to: 'supplier#getMyClients'
+  get '/apiv1/suppliers/getMyProducts', to: 'supplier#getMyProducts'
   post '/apiv1/supplier/update', to: 'supplier#update'
   post '/apiv1/supplier/create', to: 'supplier#create'
   post '/apiv1/supplier/delete', to: 'supplier#destroy'

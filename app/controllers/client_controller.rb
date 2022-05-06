@@ -13,6 +13,9 @@ class ClientController < ApplicationController
         render json: @client, status: :ok
     end
 
+
+
+
     #POST /client
     def create
         @client = Client.new(client_params)
@@ -43,7 +46,7 @@ class ClientController < ApplicationController
         def client_params
             params.permit(:address,:email, :name, :phone, :userID)
         end
-
+#GET /client/ShopID
         def set_client
             @client = Client.find(params[:id])
         end

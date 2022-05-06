@@ -39,9 +39,20 @@ class SupplierController < ApplicationController
         @supplier.destroy
     end
 
+    def getMyClients
+        clients = SupplierClientsView.where(idSupplier: params[:shopID])
+        # clients = sup.clients
+        render json: clients, status: :ok
+    end
+    
+    def getMyProducts
+        clients = SupplierProductsView.where(idSupplier: params[:shopID])
+        # clients = sup.clients
+        render json: clients, status: :ok
+    end
     private
         def supplier_params
-            params.permit(:address,:email, :name, :phone, :userID)
+            params.permit(:address,:email, :name, :phone, :userID, :shopID)
         end
 
         def set_supplier
