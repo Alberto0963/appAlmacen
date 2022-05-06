@@ -7,5 +7,8 @@ class User < ApplicationRecord
 
     validates :email, presence: true
     validates :password, presence: true
+
+    has_one :supplier, foreign_key: :userID
+    has_one :client, foreign_key: :userID
     
 end
