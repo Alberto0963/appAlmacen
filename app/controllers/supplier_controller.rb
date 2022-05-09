@@ -57,5 +57,6 @@ class SupplierController < ApplicationController
 
         def set_supplier
             @supplier = Supplier.find(params[:id])
+            
         end
 end
