@@ -8,6 +8,6 @@ class ClientSupplier < ApplicationRecord
     # belongs_to :user 
     # belongs_to :book
 
-    belongs_to :supplier, class_name: 'Supplier'
-    belongs_to :client, class_name: 'Client'
+    belongs_to :supplier, class_name: 'Supplier', optional: true
+    belongs_to :client, class_name: 'Client', optional: true
 end

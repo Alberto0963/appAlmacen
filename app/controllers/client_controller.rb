@@ -19,7 +19,7 @@ class ClientController < ApplicationController
     #POST /client
     def create
         @client = Client.new(client_params)
-           
+        # if(params)
         if @client.save
             render json: @client, status: :ok
         else
