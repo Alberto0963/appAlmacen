@@ -41,10 +41,10 @@ class ClientSupplierController < ApplicationController
 
     private
         def clientSupplier_params
-            params.permit(:idClient,:idSupplier)
+            params.permit(:idClient,:idSupplier, :id)
         end
 
         def set_clientSupplier
-            @clientSupplier = CarShop.find params[:id]
+            @clientSupplier = ClientSupplier.find params[:id]
         end
 end
