@@ -7,7 +7,6 @@ class SupplierProductsView < ApplicationRecord
     validates :name, presence: true
     validates :price, presence: true
     validates :id, presence: true
-    validates :id, presence: true
     validates :expirationDate, presence: true
     validates :descripcion, presence: true
     validates :created_at, presence: true

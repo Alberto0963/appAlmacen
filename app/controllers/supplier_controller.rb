@@ -47,6 +47,7 @@ class SupplierController < ApplicationController
     
     def getMyProducts
         clients = SupplierProductsView.where(idSupplier: params[:shopID])
+        
         # clients = sup.clients
         render json: {data: clients}, status: :ok
     end
