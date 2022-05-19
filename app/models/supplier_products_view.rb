@@ -1,5 +1,6 @@
 class SupplierProductsView < ApplicationRecord
     self.table_name = 'supplierProductView'
+    self.primary_key = 'id'
 
     validates :idSupplier, presence: true
 
@@ -13,5 +14,5 @@ class SupplierProductsView < ApplicationRecord
     validates :brand, presence: true
     validates :barcode, presence: true
 
-
+    has_many :gallery, foreign_key: :idProduct
 end

@@ -4,4 +4,6 @@ class Gallery < ApplicationRecord
 
     validates :idProduct, presence: true
     validates :image, presence: true
+
+    belongs_to :supplierProductView
 end
