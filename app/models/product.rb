@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+    self.primary_key = 'id'
 
     validates :idSupplier, presence: true
     validates :name, presence: true

@@ -38,12 +38,18 @@ class ProductoController < ApplicationController
 
     #DELETE /product/{id}
     def destroy
-        @products.destroy
+        
+        if @products.destroy
+            render json: {message: "producto eliminado", status: :ok}
+        else  
+            render json: {errors: @products.errors.full_messages },
+                    status: :unprocessable_entity
+        end
     end
 
     private
         def product_params
-            params.permit(:idSupplier,:name, :price, :brand, :barcode, :expirationDate, :qty, :descripcion)
+            params.permit(:idSupplier,:name, :price, :brand, :barcode, :expirationDate, :qty, :descripcion, :id)
         end
 
         def set_product
