@@ -10,7 +10,8 @@ class UserController < ApplicationController
 
     #GET /user/{email}
     def show
-        render json: @user, status: :ok
+        render json: {data: @user.as_json(include: [:client, :supplier])} , status: :ok
+        
     rescue 
         
         render json: ['error': 'no']
