@@ -13,6 +13,13 @@ class ClientController < ApplicationController
         render json: @client, status: :ok
     end
 
+    def mySuppliers
+        # render json: @client, status: :ok
+        sup = MySuppliersView.where(id: params[:supplierID], clientID:params[:clientID] )
+        # clients = sup.clients
+        render json: {data: sup}, status: :ok
+    end
+
 
 
 
@@ -45,7 +52,7 @@ class ClientController < ApplicationController
 
     private
         def client_params
-            params.permit(:address,:email, :name, :phone, :userID)
+            params.permit(:address,:email, :name, :phone, :userID,:supplierID, :clientID)
         end
 #GET /client/ShopID
         def set_client
