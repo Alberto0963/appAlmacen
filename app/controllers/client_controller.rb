@@ -13,6 +13,12 @@ class ClientController < ApplicationController
         render json: @client, status: :ok
     end
 
+    def showMyInfo
+        info = Client.where( id: params[:clientID] )
+
+        render json: ['data': info], status: :ok
+    end
+
     def mySuppliers
         # render json: @client, status: :ok
         sup = MySuppliersView.where( clientID:params[:clientID] )
@@ -56,6 +62,6 @@ class ClientController < ApplicationController
         end
 #GET /client/ShopID
         def set_client
-            @client = Client.find(params[:id])
+            @client = Client.find_by(id: params[:id])
         end
 end
