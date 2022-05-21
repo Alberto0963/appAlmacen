@@ -42,7 +42,7 @@ class ClientController < ApplicationController
     end
 
     #PUT /client/{id}
-    def updatelalo
+    def update
         if @client.update(client_params)
             render json: {message: "client updated", status: :ok}
         else
