@@ -16,7 +16,7 @@ class ClientController < ApplicationController
     def showMyInfo
         info = Client.where( id: params[:clientID] )
 
-        render json: info, status: :ok
+        render json: {'data':info}, status: :ok
     end
 
     def mySuppliers
