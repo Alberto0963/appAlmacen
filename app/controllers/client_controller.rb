@@ -16,7 +16,7 @@ class ClientController < ApplicationController
     def showMyInfo
         info = Client.where( id: params[:clientID] )
 
-        render json: ['data': info], status: :ok
+        render json: info, status: :ok
     end
 
     def mySuppliers
@@ -42,7 +42,7 @@ class ClientController < ApplicationController
     end
 
     #PUT /client/{id}
-    def update
+    def updatelalo
         if @client.update(client_params)
             render json: {message: "client updated", status: :ok}
         else
