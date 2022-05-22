@@ -35,7 +35,10 @@ Rails.application.routes.draw do
   post '/apiv1/client/delete', to: 'client#destroy'
   get '/apiv1/client/mySuppliers', to: 'client#mySuppliers'
   get '/apiv1/client/showMyInfo', to: 'client#showMyInfo'
+  get '/apiv1/client/getMyOrders', to: 'client#getMyOrders'
+  get '/apiv1/client/getCarShop', to: 'client#getCarShop'
 
+  
   
     # carshop request
   get '/apiv1/carshop', to: 'car_shop#index'
