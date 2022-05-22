@@ -26,6 +26,23 @@ class ClientController < ApplicationController
         render json: {data: sup}, status: :ok
     end
 
+    def getMyOrders
+        # render json: @client, status: :ok
+        sup = ViewMyOrder.where( idClient: params[:clientID], idSupplier: params[:supplierID] )
+        # clients = sup.cli      
+        render json: {data: sup}, status: :ok
+    end
+
+    def getCarShop
+        # render json: @client, status: :ok
+        sup = ViewCarShop.where( idClient: params[:clientID], idSupplier: params[:supplierID] )
+        # clients = sup.cli     clients.as_json(include: [:gallery])}, 
+        render json: {data: sup.as_json(include: [:gallery])}, status: :ok
+    end
+
+    
+
+
 
 
 
