@@ -41,7 +41,7 @@ class CarShopController < ApplicationController
 
     private
         def carShop_params
-            params.permit(:idClient,:idProduct, :qty)
+            params.permit(:idClient,:idProduct, :qty, :idSupplier)
         end
 
         def set_carShop
