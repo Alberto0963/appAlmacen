@@ -41,7 +41,7 @@ class SaleController < ApplicationController
 
     private
         def sale_params
-            params.permit(:idProduct,:idSupplier)
+            params.permit(:idClient,:idSupplier)
         end
 
         def set_sale
