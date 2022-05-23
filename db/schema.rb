@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 2022_05_12_043957) do
     t.integer "idClient"
     t.timestamp "created_at"
     t.timestamp "updated_at"
-    t.integer "qty", null: false
     t.index ["idClient"], name: "fk_client_carshop"
     t.index ["idProduct"], name: "fk_product_carshop"
   end
@@ -108,6 +107,7 @@ ActiveRecord::Schema.define(version: 2022_05_12_043957) do
     t.integer "userID"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.string "imagen", null: false
     t.index ["userID"], name: "fk_user_supplier"
   end
 
@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 2022_05_12_043957) do
     t.string "password_digest", limit: 250
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.string "imagen", default: "https://flyclipart.com/user-icon-png-pnglogocom-user-icon-png-133466", null: false
   end
 
   add_foreign_key "Gallery", "products", column: "idProduct", name: "fk_product_gallery"

@@ -7,5 +7,6 @@ class CarShop < ApplicationRecord
     validates :idProduct, presence: true
     validates :idClient, presence: true
     validates :qty, presence: true
+    validates :idSupplier, presence: true
 
 end
