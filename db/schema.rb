@@ -25,8 +25,11 @@ ActiveRecord::Schema.define(version: 2022_05_12_043957) do
     t.integer "idClient"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.integer "qty", null: false
+    t.integer "idSupplier", null: false
     t.index ["idClient"], name: "fk_client_carshop"
     t.index ["idProduct"], name: "fk_product_carshop"
+    t.index ["idSupplier"], name: "fk_suplier_carshop"
   end
 
   create_table "clientSupplier", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci", force: :cascade do |t|
@@ -95,6 +98,8 @@ ActiveRecord::Schema.define(version: 2022_05_12_043957) do
     t.integer "idSale"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+    t.integer "qty", null: false
+    t.float "costo", limit: 53, null: false
     t.index ["idProduct"], name: "fk_product_salesproduct"
     t.index ["idSale"], name: "fk_sale_salesproduct"
   end
@@ -107,7 +112,6 @@ ActiveRecord::Schema.define(version: 2022_05_12_043957) do
     t.integer "userID"
     t.timestamp "created_at"
     t.timestamp "updated_at"
-    t.string "imagen", null: false
     t.index ["userID"], name: "fk_user_supplier"
   end
 
@@ -123,12 +127,12 @@ ActiveRecord::Schema.define(version: 2022_05_12_043957) do
     t.string "password_digest", limit: 250
     t.timestamp "created_at"
     t.timestamp "updated_at"
-    t.string "imagen", default: "https://flyclipart.com/user-icon-png-pnglogocom-user-icon-png-133466", null: false
   end
 
-  add_foreign_key "Gallery", "products", column: "idProduct", name: "fk_product_gallery"
+  add_foreign_key "Gallery", "products", column: "idProduct", name: "fk_product_gallery", on_delete: :cascade
   add_foreign_key "carShop", "clients", column: "idClient", name: "fk_client_carshop"
-  add_foreign_key "carShop", "products", column: "idProduct", name: "fk_product_carshop"
+  add_foreign_key "carShop", "products", column: "idProduct", name: "fk_product_carshop", on_delete: :cascade
+  add_foreign_key "carShop", "suppliers", column: "idSupplier", name: "lnk_suppliers_carShop", on_update: :cascade, on_delete: :cascade
   add_foreign_key "clientSupplier", "clients", column: "idClient", name: "fk_client_clientsupplier"
   add_foreign_key "clientSupplier", "suppliers", column: "idSupplier", name: "fk_supplier_clientsupplier"
   add_foreign_key "clients", "users", column: "userID", name: "fk_user_client"
