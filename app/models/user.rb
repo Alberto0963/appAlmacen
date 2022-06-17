@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
     require "securerandom"
+    self.primary_key = 'id'
 
     has_secure_password
 

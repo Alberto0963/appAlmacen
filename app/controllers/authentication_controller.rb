@@ -13,5 +13,16 @@ class AuthenticationController < ApplicationController
             render json: { error: "unauthorized"}, status: :unauthorized
         end
     end
+
+
+    def destroy
+        # session.delete :id
+        # # User.find(session[:id]).destroy
+        # session[:id] = nil
+        # @current_user = nil
+        @user = nil
+        render json: { message: "LogOut"}
+        # head(:ok, status: :no_content)
+    end
     
 end

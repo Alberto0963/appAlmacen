@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # resources :supplier
 
   post '/auth/login', to: 'authentication#login'
-  
+  post '/auth/logout', to: 'authentication#destroy'
+
   # Users request
   get '/apiv1/users', to: 'user#index'
   get '/apiv1/user/show', to: 'user#show'

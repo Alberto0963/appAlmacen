@@ -29,8 +29,9 @@ class ClientController < ApplicationController
     def getMyOrders
         # render json: @client, status: :ok
         sup = ViewMyOrder.where( idClient: params[:clientID], idSupplier: params[:supplierID] )
+        stats = SaleStatus.all
         # clients = sup.cli      
-        render json: {data: sup.as_json(include: [:ViewProductOrder])}, status: :ok
+        render json: {data: sup.as_json(include: [:ViewProductOrder]),status: stats}, status: :ok
     end
 
     def getCarShop
