@@ -29,9 +29,17 @@ class ClientController < ApplicationController
     def getMyOrders
         # render json: @client, status: :ok
         sup = ViewMyOrder.where( idClient: params[:clientID], idSupplier: params[:supplierID] )
-        stats = SaleStatus.all
+        
+    
+
+        if(params[:typ] == '0')
+            stats = SaleStatus.where(id: 4)
+        else
+            stats = SaleStatus.where(id: 5)
+        end
+
         # clients = sup.cli      
-        render json: {data: sup.as_json(include: [:ViewProductOrder]),status: stats}, status: :ok
+        render json: { data: sup.as_json(include: [:ViewProductOrder]),status: stats}, status: :ok
     end
 
     def getCarShop
@@ -76,7 +84,7 @@ class ClientController < ApplicationController
 
     private
         def client_params
-            params.permit(:address,:email, :name, :phone, :userID,:supplierID, :clientID)
+            params.permit(:address,:email, :name, :phone, :userID,:supplierID, :clientID, :typ)
         end
 #GET /client/ShopID
         def set_client
