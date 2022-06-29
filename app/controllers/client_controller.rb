@@ -21,10 +21,32 @@ class ClientController < ApplicationController
 
     def mySuppliers
         # render json: @client, status: :ok
-        sup = MySuppliersView.where( clientID:params[:clientID] )
+        if params[:clientID] != nil
+            sup = MySuppliersView.where( clientID:params[:clientID] )
+        else 
+            if params[:estado] != nil 
+                sup = MySuppliersView.where(estado:params[:estado] )
+            else            
+                if params[:municipio] != nil 
+                    sup = MySuppliersView.where( municipio:params[:municipio])
+                else
+                    if params[:nombre] != nil 
+                        sup = MySuppliersView.where( nombre:params[:nombre] )
+                    else
+                        sup = MySuppliersView.all()
+                    end
+                end
+                
+            end
+        end
+    #     # clients = sup.clients
+    #     render json: {data: sup}, status: :ok
+    # end
+
         # clients = sup.clients
         render json: {data: sup}, status: :ok
     end
+
 
     def getMyOrders
         # render json: @client, status: :ok
@@ -84,7 +106,7 @@ class ClientController < ApplicationController
 
     private
         def client_params
-            params.permit(:address,:email, :name, :phone, :userID,:supplierID, :clientID, :typ)
+            params.permit(:address,:email, :name, :phone, :userID,:supplierID, :clientID, :typ, :estado, :municipio, :nombre )
         end
 #GET /client/ShopID
         def set_client
