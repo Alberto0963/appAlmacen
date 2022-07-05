@@ -1,10 +1,14 @@
 class Client < ApplicationRecord
     self.primary_key = 'id'
 
-    validates :address, presence: true
+    validates :estado, presence: true
+    validates :municipio, presence: true
+    validates :localidad, presence: true
+    validates :calle, presence: true
+
     validates :email, presence: true
     validates :name, presence: true
-    validates :phone, presence: true
+    # validates :phone, presence: true
     validates :userID, presence: true
 
     # belongs_to :holder, class_name: 'Supplier'
