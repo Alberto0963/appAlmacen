@@ -27,11 +27,13 @@ class UserController < ApplicationController
                 # supplier.name = "lll"
                 # supplier.phone = '987999'
                 supplier.save
+                sendEmail(supplier)
             else
                 client = Client.new(client_params)
                 client.userID = @user.id
 
                 client.save
+                sendEmail(client)
             end
             render json: {data: @user, dd: params[:typ], supplierInfo: supplier, clientInfo: client}, status: :ok
         else
@@ -53,7 +55,13 @@ class UserController < ApplicationController
         @user.destroy
     end
 
-
+    def sendEmail(user)
+        # user = User.where(email: 'dr.house95@hotmail.com').first
+        # UserMailer.with(user: user).weekly_summary.deliver_now
+        d=  UserMailer.with(user: user).welcome_email.deliver
+        # d = ''
+        # render json: {data: user, email: d}, status: :ok
+    end
 
     private
         def user_params

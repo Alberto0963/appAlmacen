@@ -106,4 +106,17 @@ Rails.application.configure do
   config.serve_static_assets = true
   config.assets.compile = true
   config.assets.digest = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp-mail.outlook.com',
+    port:                 587,
+    domain:               'example.com',
+    user_name:            'dr.house95@hotmail.com',
+    password:             'hijodelamamada',
+    authentication:       'plain',
+    enable_starttls_auto: true,
+    open_timeout:         5,
+    read_timeout:         5 }
+
 end

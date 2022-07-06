@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   post '/apiv1/user/update', to: 'user#update'
   post '/apiv1/user/create', to: 'user#create'
   post '/apiv1/user/delete', to: 'user#destroy'
+  post '/apiv1/user/sendEmail', to: 'user#sendEmail'
 
   # product request
   get '/apiv1/products', to: 'producto#index'
