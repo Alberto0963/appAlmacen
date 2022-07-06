@@ -22,7 +22,7 @@ class ClientController < ApplicationController
     def mySuppliers
         # render json: @client, status: :ok
         if params[:clientID] != nil
-            sup = MySuppliersView.where( clientID:params[:clientID] )
+            sup = SuppliersClientView.where( idClient:params[:clientID] )
         else 
             if params[:estado] != nil 
                 sup = MySuppliersView.where(estado:params[:estado] )
@@ -106,7 +106,7 @@ class ClientController < ApplicationController
 
     private
         def client_params
-            params.permit(:address,:email, :name, :phone, :userID,:supplierID, :clientID, :typ, :estado, :municipio, :nombre )
+            params.permit(:address,:email, :name, :phone, :userID,:supplierID, :clientID, :typ, :estado, :municipio, :nombre, :idClient )
         end
 #GET /client/ShopID
         def set_client
