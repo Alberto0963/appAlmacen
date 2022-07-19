@@ -44,7 +44,7 @@ class SaleController < ApplicationController
 
     private
         def sale_params
-            params.permit(:idClient,:idSupplier, :status,:fechaEntrega)
+            params.permit(:idClient,:idSupplier, :status,:fechaEntrega, :tipoPago,:tipoEnvio,)
         end
 
         def saleDireccionEnvio_params
