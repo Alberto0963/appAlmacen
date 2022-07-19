@@ -109,11 +109,11 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp-mail.outlook.com',
+    address:              'smtp.ionos.mx',
     port:                 587,
     domain:               'example.com',
-    user_name:            'dr.house95@hotmail.com',
-    password:             'hijodelamamada',
+    user_name:            'no-reply@kidsmapp.com.mx',
+    password:             'ux3fr%J!Qw.xhKd',
     authentication:       'plain',
     enable_starttls_auto: true,
     open_timeout:         5,

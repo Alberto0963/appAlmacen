@@ -61,7 +61,7 @@ class ClientController < ApplicationController
         end
 
         # clients = sup.cli      
-        render json: { data: sup.as_json(include: [:ViewProductOrder]),status: stats}, status: :ok
+        render json: { data: sup.as_json(include: [:ViewProductOrder,:DireccionesEnvio]),status: stats}, status: :ok
     end
 
     def getCarShop

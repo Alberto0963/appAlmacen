@@ -17,7 +17,10 @@ class SaleController < ApplicationController
     def create
         @sale = Sale.new(sale_params)
         if @sale.save
-            render json: @sale, status: :ok
+           dir = DireccionesEnvio.new(saleDireccionEnvio_params)
+           dir.idSale = @sale.id
+           dir.save
+            render json: {sale: @sale, direccion: dir}, status: :ok
         else
             render json: { errors: @sale.errors.full_messages },
                     status: :unprocessable_entity
@@ -42,6 +45,10 @@ class SaleController < ApplicationController
     private
         def sale_params
             params.permit(:idClient,:idSupplier, :status,:fechaEntrega)
+        end
+
+        def saleDireccionEnvio_params
+            params.permit(:codigoPostal, :estado, :municipio, :localidad, :calle)
         end
 
         def set_sale

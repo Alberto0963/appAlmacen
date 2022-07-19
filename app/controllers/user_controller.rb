@@ -58,7 +58,7 @@ class UserController < ApplicationController
     def sendEmail(user)
         # user = User.where(email: 'dr.house95@hotmail.com').first
         # UserMailer.with(user: user).weekly_summary.deliver_now
-        d=  UserMailer.with(user: user).welcome_email.deliver
+        d =  UserMailer.with(user: user).welcome_email_user.deliver
         # d = ''
         # render json: {data: user, email: d}, status: :ok
     end
