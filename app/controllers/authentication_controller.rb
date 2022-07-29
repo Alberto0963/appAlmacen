@@ -24,5 +24,6 @@ class AuthenticationController < ApplicationController
         render json: { message: "LogOut"}
         # head(:ok, status: :no_content)
     end
+
     
 end

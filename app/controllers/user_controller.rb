@@ -63,9 +63,43 @@ class UserController < ApplicationController
         # render json: {data: user, email: d}, status: :ok
     end
 
+    def sendnotification (token)
+        fcm = FCM.new("AAAA5VkQXNc:APA91bFnpb6RPA6aIITXOZzVyGYfotrljZfIZQ4swWJ0stesHzxN44veoqCbGFifbzIuZVs3d6-PZVD95lAB2cBR2sgzDzhkTDW3-ZXD_OdGVPPsTZ3uEYvLYDVvFoQcQIQJ4OSn0v9R")
+
+        registration_ids= [token] # an array of one or more client registration tokens
+        
+        # See https://firebase.google.com/docs/cloud-messaging/http-server-ref for all available options.
+        options = { "notification": {
+                      "title": "Portugal vs. Denmark",
+                      "body": "5 to 1"
+                  }
+        }
+        response = fcm.send(registration_ids, options)
+        render json: {data: response}, status: :ok
+
+
+    end
+
+    def registerToken
+        token = Token.new(user_token_params)
+        token.idUser = @current_user.id
+
+        if(token.save)
+            render json: {data: token}, status: :ok
+        else
+            render json: { errors: token.errors.full_messages },
+                    status: :unprocessable_entity
+        end
+    
+    end
+
     private
         def user_params
             params.permit(:email,:password)
+        end
+
+        def user_token_params
+            params.permit(:token, :device_type)
         end
 
         def set_user

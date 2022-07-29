@@ -17,6 +17,7 @@ gem 'puma', '~> 4.1'
 gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 
+gem 'fcm'
 
 
 gem 'therubyracer',  platforms: :ruby
