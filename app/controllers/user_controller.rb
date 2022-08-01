@@ -81,15 +81,27 @@ class UserController < ApplicationController
     end
 
     def registerToken
-        token = Token.new(user_token_params)
-        token.idUser = @current_user.id
 
-        if(token.save)
-            render json: {data: token}, status: :ok
+        existToken = Token.where(token: params[:token])
+
+        if(existToken.empty?)
+            token = Token.new(user_token_params)
+            token.idUser = @current_user.id
+
+            if(token.save)
+                render json: {data: token}, status: :ok
+            else
+                render json: { errors: token.errors.full_messages },
+                        status: :unprocessable_entity
+            end
         else
-            render json: { errors: token.errors.full_messages },
-                    status: :unprocessable_entity
+            existToken.update(idUser:@current_user.id ,token: params[:token], device_type: params[:device_type])
+            # existToken.idUser = 
+
+            render json: { message: 'token actualizado', update: existToken },
+                        status: :ok
         end
+
     
     end
 
