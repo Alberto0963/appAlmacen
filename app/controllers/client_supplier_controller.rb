@@ -16,8 +16,13 @@ class ClientSupplierController < ApplicationController
     #POST /carShop
     def create
         @clientSupplier = ClientSupplier.new(clientSupplier_params)
+        client = Client.find_by(id: params[:idClient])
+  
         if @clientSupplier.save
-            render json: @clientSupplier, status: :ok
+            tokens = client.user.as_json(include: [:token])
+            a = sendnotification(tokens['token'], 'Nuevo Cliente', 'El Usuario ' + client.name + ' solicita acceso a tu catalogo')
+
+            render json: {data: @clientSupplier, notification: a}, status: :ok
         else
             render json: { errors: @clientSupplier.errors.full_messages },
                     status: :unprocessable_entity
@@ -46,5 +51,28 @@ class ClientSupplierController < ApplicationController
 
         def set_clientSupplier
             @clientSupplier = ClientSupplier.find params[:id]
+        end
+
+        def sendnotification (tokens,title,body)
+            fcm = FCM.new("AAAA5VkQXNc:APA91bFnpb6RPA6aIITXOZzVyGYfotrljZfIZQ4swWJ0stesHzxN44veoqCbGFifbzIuZVs3d6-PZVD95lAB2cBR2sgzDzhkTDW3-ZXD_OdGVPPsTZ3uEYvLYDVvFoQcQIQJ4OSn0v9R")
+    
+            registration_ids= [] # an array of one or more client registration tokens
+            
+            # See https://firebase.google.com/docs/cloud-messaging/http-server-ref for all available options.
+            options = { "notification": {
+                          "title": title,
+                          "body": body
+                      }
+            }
+            
+            tokens.each do |n|
+                # return n['token']
+                # response = fcm.send(n['token'], options)
+                 registration_ids.push n['token']
+            end
+            response = fcm.send(registration_ids, options)
+            # render json: {data: response}, status: :ok
+    
+    
         end
 end
