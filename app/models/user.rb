@@ -10,6 +10,12 @@ class User < ApplicationRecord
     validates :password, presence: true
 
     has_one :supplier, foreign_key: :userID
-    has_one :client, foreign_key: :userID
-    
+    # has_one :client, foreign_key: :userID
+    has_one :client, :foreign_key => "userID", 
+                    :primary_key => "id"
+    # has_many :token, foreign_key: :idUser, primary_key => "id"
+    # belongs_to :token
+
+    has_many :token, :foreign_key => "idUser", 
+                        :primary_key => "id"
 end

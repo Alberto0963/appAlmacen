@@ -1,4 +1,6 @@
 class Sale < ApplicationRecord
+    attr_accessor :current_user
+
     self.table_name = 'sales'
 
 

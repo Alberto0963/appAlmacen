@@ -8,7 +8,7 @@ class AuthenticationController < ApplicationController
             token = jwt_encode(user_id: @user.id)
             # user = User.find_by(id: session[:user_id])
 
-            render json: { token: token,user: @user.as_json(include: [:supplier,:client])}, status: :ok
+            render json: { token: token,user: @user.as_json(include: [:supplier,:client,:token])}, status: :ok
         else
             render json: { error: "unauthorized"}, status: :unauthorized
         end

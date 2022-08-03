@@ -20,7 +20,11 @@ class SaleController < ApplicationController
            dir = DireccionesEnvio.new(saleDireccionEnvio_params)
            dir.idSale = @sale.id
            dir.save
-            render json: {sale: @sale, direccion: dir}, status: :ok
+           client = Client.find_by(id: params[:idClient])
+        #    tokens  = User.find_by(id: client.userID)
+            tokens = client.user.as_json(include: [:token])
+            a = sendnotification(tokens['token'], 'Nueva Venta', 'Compra Realizada por ' + client.name)
+            render json: {sale: @sale, direccion: dir, curent: tokens['token'], v: a}, status: :ok
         else
             render json: { errors: @sale.errors.full_messages },
                     status: :unprocessable_entity
@@ -30,7 +34,7 @@ class SaleController < ApplicationController
     #PUT /sale/{id}
     def update
         if @sale.update(sale_params)
-            render json: {message: "sale updated", status: :ok}
+            render json: {message: "sale updated" },status: :ok
         else
             render json: {errors: @sale.errors.full_messages },
                     status: :unprocessable_entity
@@ -53,5 +57,28 @@ class SaleController < ApplicationController
 
         def set_sale
             @sale = Sale.find(params[:id])
+        end
+
+        def sendnotification (tokens,title,body)
+            fcm = FCM.new("AAAA5VkQXNc:APA91bFnpb6RPA6aIITXOZzVyGYfotrljZfIZQ4swWJ0stesHzxN44veoqCbGFifbzIuZVs3d6-PZVD95lAB2cBR2sgzDzhkTDW3-ZXD_OdGVPPsTZ3uEYvLYDVvFoQcQIQJ4OSn0v9R")
+    
+            registration_ids= [] # an array of one or more client registration tokens
+            
+            # See https://firebase.google.com/docs/cloud-messaging/http-server-ref for all available options.
+            options = { "notification": {
+                          "title": title,
+                          "body": body
+                      }
+            }
+            
+            tokens.each do |n|
+                # return n['token']
+                # response = fcm.send(n['token'], options)
+                 registration_ids.push n['token']
+            end
+            response = fcm.send(registration_ids, options)
+            # render json: {data: response}, status: :ok
+    
+    
         end
 end

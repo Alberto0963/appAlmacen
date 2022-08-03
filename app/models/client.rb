@@ -17,4 +17,7 @@ class Client < ApplicationRecord
     has_many :client_supplier, foreign_key: :idCient
     has_many :clients, through: :client_supplier, foreign_key: :idCient
     
+    belongs_to :user, foreign_key: :userID, :primary_key => "id"
+
+
 end

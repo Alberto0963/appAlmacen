@@ -35,7 +35,7 @@ class SupplierController < ApplicationController
     end
 
     #DELETE /supplier/{id}
-    def destroy
+    def destroy 
         @supplier.destroy
     end
 
