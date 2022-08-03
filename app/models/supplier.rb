@@ -15,5 +15,6 @@ class Supplier < ApplicationRecord
     # has_many :clients, foreign_key: :id, class_name: 'Client'
     # has_many :clientSupplier, foreign_key: :idSupplier
     # has_many :accessable_clients, through: :clientSupplier, source: :client_supplier
-    
+    belongs_to :user, foreign_key: :userID, :primary_key => "id"
+
 end

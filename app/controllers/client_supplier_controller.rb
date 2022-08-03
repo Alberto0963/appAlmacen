@@ -16,11 +16,11 @@ class ClientSupplierController < ApplicationController
     #POST /carShop
     def create
         @clientSupplier = ClientSupplier.new(clientSupplier_params)
-        client = Client.find_by(id: params[:idClient])
+        # client = Supplier.find_by(id: params[:idClient])
   
         if @clientSupplier.save
-            tokens = client.user.as_json(include: [:token])
-            a = sendnotification(tokens['token'], 'Nuevo Cliente', 'El Usuario ' + client.name + ' solicita acceso a tu catalogo')
+            tokens = @clientSupplier.supplier.user.as_json(include: [:token])
+            a = sendnotification(tokens['token'], 'Nuevo Cliente', 'El Usuario ' + @clientSupplier.client.name + ' solicita acceso a tu catalogo')
 
             render json: {data: @clientSupplier, notification: a}, status: :ok
         else
@@ -32,7 +32,10 @@ class ClientSupplierController < ApplicationController
     #PUT /carShop/{id}
     def update
         if @clientSupplier.update(clientSupplier_params)
-            render json: {message: "Client updated", status: :ok}
+            tokens = @clientSupplier.client.user.as_json(include: [:token])
+            
+            a = sendnotification(tokens['token'], 'Acceso a Catalogo', @clientSupplier.supplier.name + ' te dio acceso a su catalogo')
+            render json: {message: "Client updated", m: @clientSupplier, notification: a}, status: :ok
         else  
             render json: {errors: @clientSupplier.errors.full_messages },
                     status: :unprocessable_entity
