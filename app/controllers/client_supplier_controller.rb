@@ -32,7 +32,7 @@ class ClientSupplierController < ApplicationController
     #PUT /carShop/{id}
     def update
         if @clientSupplier.update(clientSupplier_params)
-            render json: {message: "car updated", status: :ok}
+            render json: {message: "Client updated", status: :ok}
         else  
             render json: {errors: @clientSupplier.errors.full_messages },
                     status: :unprocessable_entity
@@ -46,7 +46,7 @@ class ClientSupplierController < ApplicationController
 
     private
         def clientSupplier_params
-            params.permit(:idClient,:idSupplier, :id)
+            params.permit(:idClient,:idSupplier, :id,:status)
         end
 
         def set_clientSupplier
