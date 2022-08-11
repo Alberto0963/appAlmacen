@@ -21,8 +21,10 @@ class SaleController < ApplicationController
            dir.idSale = @sale.id
            dir.save
            client = Client.find_by(id: params[:idClient])
+           supplier = Supplier.find_by(id: params[:idSupplier])
+
         #    tokens  = User.find_by(id: client.userID)
-            tokens = client.user.as_json(include: [:token])
+            tokens = supplier.user.as_json(include: [:token])
             a = sendnotification(tokens['token'], 'Nueva Venta', 'Compra Realizada por ' + client.name)
             render json: {sale: @sale, direccion: dir, curent: tokens['token'], v: a}, status: :ok
         else
