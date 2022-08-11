@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+    
     require "securerandom"
     self.primary_key = 'id'
 
@@ -9,7 +10,7 @@ class User < ApplicationRecord
     validates :email, presence: true
     validates :password, presence: true
 
-    has_one :supplier, foreign_key: :userID
+    has_one :supplier, foreign_key: :userID, :primary_key => "id"
     # has_one :client, foreign_key: :userID
     has_one :client, :foreign_key => "userID", 
                     :primary_key => "id"

@@ -10,6 +10,7 @@ class UserController < ApplicationController
 
     #GET /user/{email}
     def show
+        
         render json: {data: @user.as_json(include: [:client, :supplier])} , status: :ok
         
     rescue 
@@ -120,7 +121,7 @@ class UserController < ApplicationController
         end
 
         def set_user
-            # @user = User.find_by(email: params[:email])
+            @user = User.find_by(email: params[:email])
         end
 
         def supplier_params
