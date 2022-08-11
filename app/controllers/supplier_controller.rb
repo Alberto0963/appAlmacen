@@ -53,7 +53,7 @@ class SupplierController < ApplicationController
     end
     private
         def supplier_params
-            params.permit(:address,:email, :name, :phone, :userID, :shopID)
+            params.permit(:estado,:municipio,:localidad,:calle,:email, :name, :phone, :userID, :shopID)
         end
 
         def set_supplier
