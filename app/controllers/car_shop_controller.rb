@@ -45,6 +45,6 @@ class CarShopController < ApplicationController
         end
 
         def set_carShop
-            @carShop = CarShop.find params[:id]
+            @carShop = CarShop.find_by(id: params[:id])
         end
 end
