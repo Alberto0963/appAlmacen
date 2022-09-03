@@ -53,12 +53,14 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              'smtp.ionos.mx',
-    port:                 587,
+    port:                 465,
     domain:               'example.com',
     user_name:            'no-reply@kidsmapp.com.mx',
-    password:             'ux3fr%J!Qw.xhKd',
+    password:             '6B%.waU#gLC3g$u',
     authentication:       'plain',
     enable_starttls_auto: true,
+    ssl: true,
+    tls: true,
     open_timeout:         5,
     read_timeout:         5 }
 

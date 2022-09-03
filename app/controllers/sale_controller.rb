@@ -17,15 +17,20 @@ class SaleController < ApplicationController
     def create
         @sale = Sale.new(sale_params)
         if @sale.save
-           dir = DireccionesEnvio.new(saleDireccionEnvio_params)
-           dir.idSale = @sale.id
-           dir.save
+            if (params[:codigoPostal] != nil)
+                dir = DireccionesEnvio.new(saleDireccionEnvio_params)
+                dir.idSale = @sale.id
+                dir.save
+            end
            client = Client.find_by(id: params[:idClient])
            supplier = Supplier.find_by(id: params[:idSupplier])
 
         #    tokens  = User.find_by(id: client.userID)
             tokens = supplier.user.as_json(include: [:token])
             a = sendnotification(tokens['token'], 'Nueva Venta', 'Compra Realizada por ' + client.name)
+
+            sendEmailSale(@sale.id,dir)
+
             render json: {sale: @sale, direccion: dir, curent: tokens['token'], v: a}, status: :ok
         else
             render json: { errors: @sale.errors.full_messages },
@@ -41,6 +46,14 @@ class SaleController < ApplicationController
             render json: {errors: @sale.errors.full_messages },
                     status: :unprocessable_entity
         end
+    end
+
+    def sendEmailSale(saleid, dir)
+        sale = Sale.where(id: saleid).first
+        # UserMailer.with(user: user).weekly_summary.deliver_now
+        d =  OrderSendMailer.with(sale: sale, dir: dir).order_send_email.deliver_later(wait: 1.minutes)
+        # d = ''
+        # render json: {data: sale.id, email: 'd'}, status: :ok
     end
 
     #DELETE /sale/{id}

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post '/apiv1/user/update', to: 'user#update'
   post '/apiv1/user/create', to: 'user#create'
   post '/apiv1/user/delete', to: 'user#destroy'
-  post '/apiv1/user/sendEmail', to: 'user#sendEmail'
+  post '/apiv1/user/sendEmails', to: 'user#sendEmails'
   post '/apiv1/user/sendnotification', to: 'user#sendnotification'
   post '/apiv1/user/registerToken', to: 'user#registerToken'
 
@@ -79,6 +79,7 @@ Rails.application.routes.draw do
   post '/apiv1/sale/update', to: 'sale#update'
   post '/apiv1/sale/create', to: 'sale#create'
   post '/apiv1/sale/delete', to: 'sale#destroy'
+  post '/apiv1/sale/sendEmailSale', to: 'sale#sendEmailSale'
 
    # saleProduct request
    get '/apiv1/saleProduct', to: 'sale_product#index'

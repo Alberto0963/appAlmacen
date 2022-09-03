@@ -64,6 +64,14 @@ class UserController < ApplicationController
         # render json: {data: user, email: d}, status: :ok
     end
 
+    def sendEmails()
+        user = User.where(email: params[:email]).first
+        # UserMailer.with(user: user).weekly_summary.deliver_now
+        d =  OrderSendMailer.with(user: user).order_send_email.deliver
+        # d = ''
+        render json: {data: user, email: d}, status: :ok
+    end
+
     def sendnotification (tokens)
         fcm = FCM.new("AAAA5VkQXNc:APA91bFnpb6RPA6aIITXOZzVyGYfotrljZfIZQ4swWJ0stesHzxN44veoqCbGFifbzIuZVs3d6-PZVD95lAB2cBR2sgzDzhkTDW3-ZXD_OdGVPPsTZ3uEYvLYDVvFoQcQIQJ4OSn0v9R")
 
