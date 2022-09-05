@@ -41,6 +41,13 @@ class SaleController < ApplicationController
     #PUT /sale/{id}
     def update
         if @sale.update(sale_params)
+            if params[:fechaEntrega] != nil
+                dir = DireccionesEnvio.find_by(idSale: @sale.id)
+                ShipperEmailMailer.with(sale: @sale,dir: dir).shipper_email.deliver_later(wait: 1.minutes)
+            else
+
+            end
+
             render json: {message: "sale updated" },status: :ok
         else
             render json: {errors: @sale.errors.full_messages },
@@ -63,7 +70,7 @@ class SaleController < ApplicationController
 
     private
         def sale_params
-            params.permit(:idClient,:idSupplier, :status,:fechaEntrega, :tipoPago,:tipoEnvio,)
+            params.permit(:id,:idClient,:idSupplier, :status,:fechaEntrega, :tipoPago,:tipoEnvio,)
         end
 
         def saleDireccionEnvio_params

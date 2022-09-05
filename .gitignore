@@ -27,3 +27,4 @@
 /config/master.key
 /config/deploy-secrets.yml
 /config/database.yml
+/config/environments/*

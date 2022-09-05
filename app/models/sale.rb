@@ -1,6 +1,7 @@
 class Sale < ApplicationRecord
 
     self.table_name = 'sales'
+    self.primary_key = 'id'
 
 
     validates :idClient, presence: true
