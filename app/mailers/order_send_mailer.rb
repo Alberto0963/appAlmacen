@@ -4,6 +4,6 @@ class OrderSendMailer < ApplicationMailer
         @email = @sale.client.email
         @dir = params[:dir]
         @url  = 'http://example.com/login'
-        mail(to: @email, subject: 'Orden Enviada')
+        mail(to: @email, subject: 'Confirmación de Orden')
       end
 end
