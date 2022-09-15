@@ -650,7 +650,7 @@
                                                                                         style="vertical-align:inherit">
                                                                                         <font
                                                                                             style="vertical-align:inherit">
-                                                                                            <%=  myItem.name %></font>
+                                                                                            <%=  myItem.name %> (<%= myItem.qty %>)</font>
                                                                                     </font>
                                                                                 </p>
                                                                             </td>
@@ -662,7 +662,7 @@
                                                                                         style="vertical-align:inherit">
                                                                                         <font
                                                                                             style="vertical-align:inherit">
-                                                                                            $ <%=  myItem.price %> </font>
+                                                                                            $ <%=  myItem.price * myItem.qty %> </font>
                                                                                     </font>
                                                                                 </p>
                                                                             </td>
