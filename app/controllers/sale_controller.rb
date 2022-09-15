@@ -10,7 +10,7 @@ class SaleController < ApplicationController
 
     #GET /sale/{id}
     def show
-        render json: @sale, status: :ok
+        render json: @sale.sale_product, status: :ok
     end
 
     #POST /sale

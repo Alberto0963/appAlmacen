@@ -636,9 +636,9 @@
                                                                         cellpadding="1" border="0" align="left"
                                                                         role="presentation">
                                                                             <% total = 0.0 %>
-                                                                        <% @sale.products.each do |myItem| %>
+                                                                        <% @sale.sale_product.each do |myItem| %>
                                                                             
-                                                                          <% total = myItem.price + total %>
+                                                                          <% total = myItem.product.price + total %>
                                                                        
                                                                         
                                                                         <tr style="border-collapse:collapse">
@@ -650,7 +650,7 @@
                                                                                         style="vertical-align:inherit">
                                                                                         <font
                                                                                             style="vertical-align:inherit">
-                                                                                            <%=  myItem.name %> (<%= myItem.sale_product.qty %>)</font>
+                                                                                            <%=  myItem.product.name %> (<%= myItem.qty %>)</font>
                                                                                     </font>
                                                                                 </p>
                                                                             </td>
@@ -662,7 +662,7 @@
                                                                                         style="vertical-align:inherit">
                                                                                         <font
                                                                                             style="vertical-align:inherit">
-                                                                                            $ <%=  myItem.price * myItem.sale_product.qty %> </font>
+                                                                                            $ <%=  myItem.product.price * myItem.qty %> </font>
                                                                                     </font>
                                                                                 </p>
                                                                             </td>
