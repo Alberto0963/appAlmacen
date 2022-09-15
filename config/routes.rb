@@ -76,6 +76,7 @@ Rails.application.routes.draw do
 
   # sale request
   get '/apiv1/sale', to: 'sale#index'
+  get '/apiv1/sale/show', to: 'sale#show'
   post '/apiv1/sale/update', to: 'sale#update'
   post '/apiv1/sale/create', to: 'sale#create'
   post '/apiv1/sale/delete', to: 'sale#destroy'
