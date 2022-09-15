@@ -29,7 +29,7 @@ class SaleController < ApplicationController
             tokens = supplier.user.as_json(include: [:token])
             a = sendnotification(tokens['token'], 'Nueva Venta', 'Compra Realizada por ' + client.name)
 
-            sendEmailSale(@sale.id,dir)
+            sendEmailSale(@sale.id,dir,'Confirmación Orden')
 
             render json: {sale: @sale, direccion: dir, curent: tokens['token'], v: a}, status: :ok
         else
@@ -43,22 +43,22 @@ class SaleController < ApplicationController
         if @sale.update(sale_params)
             if params[:fechaEntrega] != nil
                 dir = DireccionesEnvio.find_by(idSale: @sale.id)
-                ShipperEmailMailer.with(sale: @sale,dir: dir).shipper_email.deliver_later(wait: 1.minutes)
+               email = ShipperEmailMailer.with(sale: @sale,dir: dir).shipper_email.deliver_later(wait: 1.minutes)
             else
 
             end
 
-            render json: {message: "sale updated" },status: :ok
+            render json: {message: "sale updated", email: email, sale: @sale },status: :ok
         else
             render json: {errors: @sale.errors.full_messages },
                     status: :unprocessable_entity
         end
     end
 
-    def sendEmailSale(saleid, dir)
+    def sendEmailSale(saleid, dir,type)
         sale = Sale.where(id: saleid).first
         # UserMailer.with(user: user).weekly_summary.deliver_now
-        d =  OrderSendMailer.with(sale: sale, dir: dir).order_send_email.deliver_later(wait: 1.minutes)
+        d =  OrderSendMailer.with(sale: sale, dir: dir,type: type).order_send_email.deliver_later(wait: 1.minutes)
         # d = ''
         # render json: {data: sale.id, email: 'd'}, status: :ok
     end
